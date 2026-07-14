@@ -24,4 +24,43 @@ public class CategoryService {
 
         return categoryRepository.save(category);
     }
+
+    // Get All Categories
+    public List<Category> getAllCategories() {
+
+        return categoryRepository.findAll();
+
+    }
+
+    // Update Category
+    public Category updateCategory(String id, Category updatedCategory) {
+
+        Category existingCategory = categoryRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Category not found"));
+
+        existingCategory.setName(updatedCategory.getName());
+        existingCategory.setDescription(updatedCategory.getDescription());
+
+        return categoryRepository.save(existingCategory);
+    }
+    // Delete Category
+    public String deleteCategory(String id) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Category not found"));
+
+        categoryRepository.delete(category);
+
+        return "Category Deleted Successfully";
+    }
+
+    // Get Category by ID
+    public Category getCategoryById(String id) {
+
+        return categoryRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Category not found"));
+    }
 }
