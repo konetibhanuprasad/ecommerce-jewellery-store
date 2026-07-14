@@ -4,6 +4,8 @@ import com.jewellery.backend.dto.RegisterRequest;
 import com.jewellery.backend.entity.User;
 import com.jewellery.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import com.jewellery.backend.dto.LoginRequest;
+import com.jewellery.backend.dto.LoginResponse;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -27,5 +29,11 @@ public class AuthController {
         user.setPhone(request.getPhone());
 
         return userService.registerUser(user);
+    }
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginRequest request) {
+
+        return userService.loginUser(request);
+
     }
 }
