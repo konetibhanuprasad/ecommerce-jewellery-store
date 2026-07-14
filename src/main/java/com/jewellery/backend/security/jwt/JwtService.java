@@ -1,6 +1,5 @@
 package com.jewellery.backend.security.jwt;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Service;
@@ -16,21 +15,12 @@ public class JwtService {
     public String generateToken(String email) {
 
         return Jwts.builder()
-
                 .setSubject(email)
-
                 .setIssuedAt(new Date())
-
                 .setExpiration(
                         new Date(System.currentTimeMillis() + 1000 * 60 * 60)
                 )
-
-                .signWith(
-                        SignatureAlgorithm.HS256,
-                        SECRET_KEY
-                )
-
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
-
 }
